@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% block title %} 
+Posts
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h6> List of Posts </h6>
+
+        <div class="container">
+            {% for post in posts %}
+            <ul>
+                <li>
+                    <h6>{{post.title|title}}</h6>
+                    <p><small>
+    
+                        Published On:{{ post.created_on}} |&nbsp;
+            
+                        Categories:&nbsp;
+                        {% for category in post.category.all %}
+            
+                        <a href="{% url 'category_post' category.name %}" style="color:  rgb(173, 156, 156)">
+            
+                            {{ category.name }}
+            
+                        </a>&nbsp;
+            
+                        {% endfor %}
+            
+                    </small></p>
+      
+                <P> {{post.body|slice:":400"}}
+                .....<a href="{% url 'post_detail' post.pk %}" style="color:  rgb(173, 156, 156)">readmore</a> 
+                </P>
+                </li>
+            </ul>
+           
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
